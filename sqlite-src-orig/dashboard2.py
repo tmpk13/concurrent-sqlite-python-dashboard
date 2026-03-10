@@ -226,7 +226,7 @@ def base_layout() -> dict:
 
 def empty_fig(title: str = "waiting for data...") -> go.Figure:
     f = go.Figure()
-    f.update_layout(**base_layout(), title=title)
+    f.update_layout(**base_layout(), title=title, uirevision="f-zoom")
     return f
 
 
@@ -599,6 +599,7 @@ def create_app(log_sources: dict[str, str], sweep_script: str | None = None,
                 **base_layout(),
                 yaxis=dict(autorange=True, title="% time"),
                 title="% of total interval time per lock state",
+                uirevision="hist-zoom"
             )
             fig_hist.update_traces(textposition="outside")
         else:
@@ -618,6 +619,7 @@ def create_app(log_sources: dict[str, str], sweep_script: str | None = None,
                 **base_layout(),
                 yaxis=dict(autorange=True, title="% contended"),
                 title="% time contended (SHARED + RESERVED + PENDING + EXCLUSIVE)",
+                uirevision="cont-zoom"
             )
             fig_cont.update_traces(textposition="outside")
             fig_cont.update_coloraxes(showscale=False)
@@ -659,7 +661,7 @@ def create_app(log_sources: dict[str, str], sweep_script: str | None = None,
                     color_discrete_map=STATE_COLORS,
                     category_orders={"label": sorted(gdf["label"].unique())},
                 )
-                fig_g.update_layout(**base_layout(), xaxis_title="log line (pseudo-time)")
+                fig_g.update_layout(**base_layout(), xaxis_title="log line (pseudo-time)", uirevision="gantt-zoom")
             else:
                 fig_g = empty_fig(f"{lbl} — waiting")
             gantts.append(fig_g)
@@ -839,6 +841,7 @@ def create_app(log_sources: dict[str, str], sweep_script: str | None = None,
         fig.update_layout(
             **base_layout(),
             xaxis_title="elapsed seconds",
+            uirevision="fig-zoom"
         )
         return fig
 

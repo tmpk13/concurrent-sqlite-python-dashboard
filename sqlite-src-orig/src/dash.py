@@ -218,10 +218,10 @@ def create_app(log_files, pid_map=None, search_dirs=None):
                 color_discrete_map=STATE_COLORS,
                 title="Lock hold intervals (x=log line as pseudo-time)",
             )
-            fig_gantt.update_layout(**template_args, xaxis_title="log line (pseudo-time)")
+            fig_gantt.update_layout(**template_args, xaxis_title="log line (pseudo-time)", uirevision="gantt-zoom")
         else:
             fig_gantt = go.Figure()
-            fig_gantt.update_layout(**template_args)
+            fig_gantt.update_layout(**template_args, uirevision="gantt-zoom")
 
         # Per-fd stacked bar
         if not df.empty:
