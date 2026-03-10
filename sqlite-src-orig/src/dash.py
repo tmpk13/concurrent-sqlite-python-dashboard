@@ -137,7 +137,7 @@ def create_app(log_files, pid_map=None, search_dirs=None):
         df = build_intervals(events)
         datasets[label] = df
 
-    app = Dash(__name__)
+    app = Dash(__name__, requests_pathname_prefix="/")
     app.layout = html.Div(style={"backgroundColor": BG_COLOR, "color": TEXT_COLOR,
                                   "fontFamily": "monospace", "padding": "20px"}, children=[
         html.H2("SQLite Lock State Dashboard", style={"color": TEXT_COLOR}),
@@ -268,4 +268,4 @@ if __name__ == "__main__":
         print(f"PID map: {pid_map}")
 
     app = create_app(logs, pid_map=pid_map, search_dirs=search_dirs)
-    app.run(debug=True, host="0.0.0.0", port=3070)
+    app.run(debug=False, host="0.0.0.0", port=3070)
