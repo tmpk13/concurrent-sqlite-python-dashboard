@@ -55,8 +55,9 @@ for rate in $rates
     set db      "$trace_dir/rate_$rate.db"
     set logfile "$trace_dir/rate_$rate.log"
 
-    rm -f $db $db-wal $db-shm $logfile
     
+    rm -f $db $db-wal $db-shm
+    truncate -s 0 $logfile
 
     set avg_wait (math "1.0 / $rate")
     set numloops (math --scale=0 "$duration * $rate / $writers")
